@@ -1,7 +1,11 @@
 {
   "name": "graphql-call",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adostal/graphql-call"
+  },
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
