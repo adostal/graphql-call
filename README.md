@@ -6,23 +6,22 @@
 
 `npm i graphql-call isomorphic-fetch --save`
 
-## Usage
+## Queries
 
 ### Simple query
+```
+query {
+    users {
+        id
+    }
+}
+```
 ```typescript
 import 'isomorphic-fetch';
 import api, {GraphQLCall} from "graphql-call";
 
 let client = api({url: 'http://localhost:4000/graphql'});
 
-/**
-* Translate to:
-* query {
-*   users {
-*       id
-*   }
-* }
-*/
 client.query({
     users: {
         result: 'id'
@@ -35,20 +34,51 @@ client.query({
 ```
 
 ### Query with params
+```
+query {
+    users(search: "Test") {
+        id
+    }
+}
+```
 ```typescript
-let filter = {search: "Test"}
-/**
-* Translate to:
-* query {
-*   users(search: "Test") {
-*       id
-*   }
-* }
-*/
 client.query({
     users: {
-        variables: filter,
+        variables: {search: "Test"},
         result: 'id'
+    }
+});
+```
+
+### Complex query
+```
+query {
+    list: items (search: "Test", limit: 10, inTrash: true, labels: [1,2,4]) {
+        countAll
+        data {
+            id
+            firstName
+        }
+    }
+}
+```
+```typescript
+let filter = {
+    search: "Test",
+    limit: 10,
+    inTrash: true,
+    labels: [1, 2, 4]
+};
+client.query({
+    items: {
+        variables: filter,
+        result: `
+        countAll
+        data {
+            id
+            firstName
+        }`,
+        alias: 'list'
     }
 });
 ```
