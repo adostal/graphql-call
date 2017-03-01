@@ -82,3 +82,76 @@ client.query({
     }
 });
 ```
+
+### Multiple queries
+```
+query {
+    users {
+        id
+    }
+    items {
+        id
+        name
+    }
+}
+```
+```typescript
+client.query({
+    users: {
+        result: 'id'
+    },
+    items: {
+        result: `
+        id
+        name`
+    }
+});
+```
+
+## Mutations
+
+> Mutations using pattern: nameMutation(input: {}) ...
+
+## Simple mutation
+```
+mutation {
+    addUser (input: {firstName: "Ales", lastName: "Dostal"}) {
+        id
+    }
+}
+```
+```typescript
+client.mutation({
+    addUser: {
+        variables: {firstName: "Ales", lastName: "Dostal"},
+        result: 'id'
+    }
+});
+```
+
+### Complex mutation
+> As complex query. Difference between query is: `client.query(...)` to `client.mutation(....)`
+
+## Token and headers customize
+
+### Add token to http header
+```typescript
+let client = api({
+    url: 'http://localhost:4000/graphql',
+    headers: {
+        Authorization: 'Bearer xxxx',
+    }
+});
+```
+
+### Customize http header
+```typescript
+let client = api({
+    url: 'http://localhost:4000/graphql',
+    headers: {
+        Authorization: 'Bearer xxxx',
+        ClientType: 'web',
+        ...
+    }
+});
+```
