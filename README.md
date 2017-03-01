@@ -1,6 +1,6 @@
 # GraphQL Call
 
-> Library for call GraphQL API.
+> Library for call GraphQL API: GraphQL client
 
 ## Install
 
@@ -112,7 +112,7 @@ client.query({
 
 > Mutations using pattern: nameMutation(input: {}) ...
 
-## Simple mutation
+### Simple mutation
 ```
 mutation {
     addUser (input: {firstName: "Ales", lastName: "Dostal"}) {
