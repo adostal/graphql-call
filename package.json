@@ -1,7 +1,8 @@
 {
   "name": "graphql-call",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.5",
+  "description": "GraphQL client",
+  "keywords": ["graphql", "graphql-client", "fetch", "client", "javascript", "typescript", "react", "react-native"],
   "repository": {
     "type": "git",
     "url": "https://github.com/adostal/graphql-call"
