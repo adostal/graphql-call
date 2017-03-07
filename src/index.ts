@@ -49,7 +49,7 @@ const getQuery = (request: GraphQLCallRequest, query: GraphQLCallQuery, type: 'q
 };
 
 const getQueryString = (query: GraphQLCallQuery, type: 'query' | 'mutation'): string => {
-    let result:string[] = [`${type} {`];
+    let result: string[] = [`${type} {`];
     Object.keys(query).forEach(name => {
         let q = query[name];
         result.push(q.alias ? `${q.alias}:${name}` : name);
@@ -75,6 +75,9 @@ const getValue = (value: any): any => {
     }
     if (Array.isArray(value)) {
         return `[${value.map(v => getValue(v)).join(', ')}]`;
+    }
+    if (value !== null && typeof value === 'object') {
+        return `{${Object.keys(value).map(v => v + ':' + getValue(value[v]))}}`;
     }
     return value;
 };
